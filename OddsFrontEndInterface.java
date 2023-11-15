@@ -1,3 +1,3 @@
-public class OddsFrontEndInterface {
+public interface OddsFrontEndInterface {
     
 }
