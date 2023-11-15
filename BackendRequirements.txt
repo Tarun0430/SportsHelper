@@ -1,0 +1,3 @@
+1. Calculate odds Percentage Value (add a prop)
+3. Save highest prop odds
+4. Clear saved props
