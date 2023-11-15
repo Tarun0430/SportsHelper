@@ -1,20 +1,9 @@
 {
     "java.project.referencedLibraries": [
-      "lib/**/*.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.base.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.controls.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.web.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.swing.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.graphics.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.media.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx-swt.jar",
-      "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/javafx.fxml.jar"
+        "lib/**/*.jar",
+        "/Users/tarunpalani/Downloads/javafx-sdk-21.0.1/lib/**/*.jar"
     ],
     "java.project.sourcePaths": [
-      "src",
-      "SportsHelper"
-
-    ],
-    "java.project.outputPath": "bin"
-  }
-  
+        ""
+    ]
+}

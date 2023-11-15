@@ -89,7 +89,7 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface{
      * Sets the display for if Add prop is selected
      */
     public void AddPropSelected(){
-
+        
     }
 
     /**
