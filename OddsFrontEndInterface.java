@@ -46,6 +46,11 @@ public interface OddsFrontEndInterface {
      */
     public void backButton();
 
+    /**
+     * Closes app (close stage)
+     */
+    public void exitButton();
+
 
 
 
