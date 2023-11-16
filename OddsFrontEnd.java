@@ -5,26 +5,31 @@ import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class OddsFrontEnd extends Application implements OddsFrontEndInterface{
- /**
+public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
+    /**
      * Constructor
+     * 
      * @param backend
      * @param scanner
      */
-     //public OddsFrontend(OddsBackEnd backend) {
-       // this.backend = backend;
-   // }   
+    // public OddsFrontend(OddsBackEnd backend) {
+    // this.backend = backend;
+    // }
 
-     /**
+    /**
      * Sets up the stage/display and calls on the following methods when needed
+     * 
      * @param primaryStage
      */
     public void start(Stage primaryStage) {
@@ -36,13 +41,22 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface{
         Button exitButton = new Button("Exit");
 
         // Set actions for buttons
-        addPropButton.setOnAction(e -> handleAddPropButton());
+        addPropButton.setOnAction(e -> AddPropSelected());
         seeSavedPropsButton.setOnAction(e -> handleSeeSavedPropsButton());
-        exitButton.setOnAction(e -> primaryStage.close());
+        exitButton.setOnAction(e -> exitButton(primaryStage));
 
         // Add buttons to the top and bottom of the BorderPane
         root.setTop(createTopPane(addPropButton, seeSavedPropsButton));
         root.setBottom(createBottomPane(exitButton));
+
+        // Load the image
+        Image image = new Image("file:System.jpeg");
+
+        // Create an ImageView and set the image
+        ImageView imageView = new ImageView(image);
+
+        // Add the ImageView to the center of the BorderPane
+        root.setCenter(imageView);
 
         // Create a scene and set it on the stage
         Scene scene = new Scene(root, 400, 300);
@@ -53,9 +67,10 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface{
         primaryStage.show();
 
     }
-        private void handleAddPropButton() {
-        // Implement the action for "Add a prop" button
-        System.out.println("Add a prop button clicked");
+
+    public void AddPropSelected() {
+       
+
     }
 
     private void handleSeeSavedPropsButton() {
@@ -84,51 +99,44 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface{
         return bottomPane;
     }
 
-
-     /**
-     * Sets the display for if Add prop is selected
-     */
-    public void AddPropSelected(){
-        
-    }
-
     /**
      * Sets the display and calls necessary backend methods to save prop
      */
-    public void savePropSelected(){
+    public void savePropSelected() {
 
     }
 
     /**
      * Sets the display and calls necessary backend methods to see saved props
      */
-    public void showSavedPropsSelected(){
+    public void showSavedPropsSelected() {
 
     }
 
     /**
      * Sets the display and calls necessary backend methods to clear saved props
      */
-    public void clearSavedPropsSelected(){
+    public void clearSavedPropsSelected() {
 
     }
 
     /**
      * Takes user back to main menu
      */
-    public void backButton(){
+    public void backButton() {
 
     }
 
     /**
      * Closes app (close stage)
      */
-    public void exitButton(){
-
+    public void exitButton(Stage primaryStage) {
+        primaryStage.close();
     }
+
 
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

@@ -49,7 +49,7 @@ public interface OddsFrontEndInterface {
     /**
      * Closes app (close stage)
      */
-    public void exitButton();
+    public void exitButton(Stage primaryStage);
 
 
 
