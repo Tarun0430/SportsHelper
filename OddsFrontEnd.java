@@ -20,17 +20,12 @@ import java.util.Arrays;
  * This is the OddsFrontEnd class containing all the frontend methods
  */
 public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
+    private OddsBackend backend;
     ArrayList<String> oddsList = new ArrayList<>();
-    /**
-     * Constructor
-     * 
-     * @param backend
-     * @param scanner
-     */
-    // public OddsFrontend(OddsBackEnd backend) {
-    // this.backend = backend;
-    // }
 
+    public void setBackend(OddsBackend backend) {
+        this.backend = backend;
+    }
     /**
      * Sets up the stage/display and calls on the following methods when needed
      * 
@@ -158,18 +153,21 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         double underOdds = Double.parseDouble(underOddsField.getText());
         String[] calculatedStrings = new String[2];
 
-        // calculatedStrings = OddsBackend.getPropPercentages(underOdds, overOdds, line,
-        // propType, playerName);
+        calculatedStrings = backend.getPropPercentages(underOdds, overOdds, line,
+                propType, playerName);
+
+        String higherOddsString = new String(calculatedStrings[0]);
+        String lowerOddsString = new String(calculatedStrings[1]);
 
         // Clears and starts process for new GUI
         clearCurrentGUI(primaryStage);
         BorderPane addPropRoot = new BorderPane();
 
-        Label higherOddsLabel = new Label(calculatedStrings[0]);
-        Label lowerOddsLabel = new Label(calculatedStrings[1]);
+        Label higherOddsLabel = new Label(higherOddsString);
+        Label lowerOddsLabel = new Label(lowerOddsString);
 
         Button savePropButton = new Button("Save Prop");
-        savePropButton.setOnAction(e -> savePropSelected(oddsList, calculatedStrings[0], primaryStage));
+        savePropButton.setOnAction(e -> savePropSelected(oddsList, higherOddsString, primaryStage));
 
         Button propShownScreenBackButton = new Button("Back");
         propShownScreenBackButton.setOnAction(e -> backButton(primaryStage));
@@ -191,7 +189,7 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
      * Sets the display and calls necessary backend methods to save prop
      */
     public void savePropSelected(ArrayList<String> oddsList, String highestOdds, Stage primaryStage) {
-        // OddsBackend.saveHighestPropOdds(oddsList, highestOdds);
+        backend.saveHighestPropOdds(oddsList, highestOdds);
         clearCurrentGUI(primaryStage);
         BorderPane addPropRoot = new BorderPane();
 
@@ -258,9 +256,6 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
             addPropRoot.setBottom(clearSavedPropsButton);
             BorderPane.setAlignment(clearSavedPropsButton, Pos.BOTTOM_RIGHT);
 
-            addPropRoot.setBottom(savedPropScreenBackButton);
-            BorderPane.setAlignment(savedPropScreenBackButton, Pos.BOTTOM_LEFT);
-
             Scene addPropScene = new Scene(addPropRoot, 400, 300);
             primaryStage.setScene(addPropScene);
 
@@ -271,12 +266,12 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
      * Sets the display and calls necessary backend methods to clear saved props
      */
     public void clearSavedPropsSelected(ArrayList<String> oddsList, Stage primaryStage) {
-        // OddsBackend.clearList(oddsList);
+        backend.clearList(oddsList);
         clearCurrentGUI(primaryStage);
         BorderPane addPropRoot = new BorderPane();
 
         Button confirmButton = new Button("PRESS TO CONFIRM");
-        confirmButton.setOnAction(e -> System.out.print("Cleared"));// OddsBackend.clearList(oddsList););
+        confirmButton.setOnAction(e -> backend.clearList(oddsList));
 
         Button clearConfirmScreenBackButton = new Button("Back");
         clearConfirmScreenBackButton.setOnAction(e -> backButton(primaryStage));
@@ -286,6 +281,31 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         vbox.setAlignment(Pos.CENTER);
         addPropRoot.setCenter(vbox);
 
+        addPropRoot.setBottom(clearConfirmScreenBackButton);
+        BorderPane.setAlignment(clearConfirmScreenBackButton, Pos.BOTTOM_LEFT);
+
+        Scene addPropScene = new Scene(addPropRoot, 400, 300);
+        primaryStage.setScene(addPropScene);
+
+    }
+
+    public void confirmButtonSelected(Stage primaryStage, ArrayList<String> oddsList) {
+        backend.clearList(oddsList);
+        clearCurrentGUI(primaryStage);
+        BorderPane addPropRoot = new BorderPane();
+
+        Label succesfullClearLabel = new Label("Succesfully Cleared");
+
+        Button successScreenBackButton = new Button("Back");
+        successScreenBackButton.setOnAction(e -> backButton(primaryStage));
+
+        VBox vbox = new VBox(10);
+        vbox.getChildren().addAll(succesfullClearLabel);
+        vbox.setAlignment(Pos.CENTER);
+        addPropRoot.setCenter(vbox);
+
+        addPropRoot.setBottom(successScreenBackButton);
+        BorderPane.setAlignment(successScreenBackButton, Pos.BOTTOM_LEFT);
     }
 
     /**
@@ -318,6 +338,9 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
      * @param args
      */
     public static void main(String[] args) {
+        OddsFrontEnd frontend = new OddsFrontEnd();
+        frontend.setBackend(new OddsBackend());
+    
         launch(args);
     }
 

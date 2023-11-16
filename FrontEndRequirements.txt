@@ -1,4 +1,0 @@
-1. Start App 
-2. Get Odds Percentage Value (add a prop)
-3. If necessary save highest prop Odds
-4. Clear saved props
