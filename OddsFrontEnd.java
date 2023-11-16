@@ -16,7 +16,11 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This is the OddsFrontEnd class containing all the frontend methods
+ */
 public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
+    ArrayList<String> oddsList = new ArrayList<>();
     /**
      * Constructor
      * 
@@ -41,8 +45,8 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         Button exitButton = new Button("Exit");
 
         // Set actions for buttons
-        addPropButton.setOnAction(e -> AddPropSelected());
-        seeSavedPropsButton.setOnAction(e -> handleSeeSavedPropsButton());
+        addPropButton.setOnAction(e -> addPropSelected(primaryStage));
+        seeSavedPropsButton.setOnAction(e -> showSavedPropsSelected(oddsList, primaryStage));
         exitButton.setOnAction(e -> exitButton(primaryStage));
 
         // Add buttons to the top and bottom of the BorderPane
@@ -68,16 +72,12 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
     }
 
-    public void AddPropSelected() {
-       
-
-    }
-
-    private void handleSeeSavedPropsButton() {
-        // Implement the action for "See saved props" button
-        System.out.println("See saved props button clicked");
-    }
-
+    /**
+     * 
+     * @param addPropButton
+     * @param seeSavedPropsButton
+     * @return
+     */
     private BorderPane createTopPane(Button addPropButton, Button seeSavedPropsButton) {
         BorderPane topPane = new BorderPane();
 
@@ -88,6 +88,11 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         return topPane;
     }
 
+    /**
+     * 
+     * @param exitButton
+     * @return
+     */
     private BorderPane createBottomPane(Button exitButton) {
         BorderPane bottomPane = new BorderPane();
 
@@ -100,30 +105,186 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
     }
 
     /**
+     * 
+     */
+    public void addPropSelected(Stage primaryStage) {
+        clearCurrentGUI(primaryStage);
+        BorderPane addPropRoot = new BorderPane();
+        // Create labels
+        Label playerNameLabel = new Label("Player Name:");
+        Label propTypeLabel = new Label("Prop Type:");
+        Label lineLabel = new Label("Line:");
+        Label overOddsLabel = new Label("Over Odds:");
+        Label underOddsLabel = new Label("Under Odds:");
+
+        // Create text fields
+        TextField playerNameField = new TextField();
+        TextField propTypeField = new TextField();
+        TextField lineField = new TextField();
+        TextField overOddsField = new TextField();
+        TextField underOddsField = new TextField();
+
+        // Create Enter button (move to the right side)
+        Button enterButton = new Button("Enter");
+        enterButton.setOnAction(e -> addPropEnterButton(playerNameField, propTypeField, lineField, overOddsField,
+                underOddsField, primaryStage));
+
+        // Create Back button
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> backButton(primaryStage));
+
+        // Create a VBox to hold labels, text fields, and buttons
+        VBox vbox = new VBox(10); // 10 is the spacing between nodes
+        vbox.getChildren().addAll(playerNameLabel, playerNameField, propTypeLabel, propTypeField, lineLabel, lineField,
+                overOddsLabel, overOddsField, underOddsLabel, underOddsField, enterButton, backButton);
+        vbox.setAlignment(Pos.CENTER_LEFT);
+
+        // Set VBox to the center of the BorderPane
+        addPropRoot.setCenter(vbox);
+        Scene addPropScene = new Scene(addPropRoot, 400, 300);
+        primaryStage.setScene(addPropScene);
+
+    }
+
+    private void addPropEnterButton(TextField playerNameField, TextField propTypeField, TextField lineField,
+            TextField overOddsField, TextField underOddsField, Stage primaryStage) {
+        // Get the values from the text fields
+        String playerName = playerNameField.getText();
+        String propType = propTypeField.getText();
+
+        // Parse other fields as needed (e.g., for numerical values)
+        double line = Double.parseDouble(lineField.getText());
+        double overOdds = Double.parseDouble(overOddsField.getText());
+        double underOdds = Double.parseDouble(underOddsField.getText());
+        String[] calculatedStrings = new String[2];
+
+        // calculatedStrings = OddsBackend.getPropPercentages(underOdds, overOdds, line,
+        // propType, playerName);
+
+        // Clears and starts process for new GUI
+        clearCurrentGUI(primaryStage);
+        BorderPane addPropRoot = new BorderPane();
+
+        Label higherOddsLabel = new Label(calculatedStrings[0]);
+        Label lowerOddsLabel = new Label(calculatedStrings[1]);
+
+        Button savePropButton = new Button("Save Prop");
+        savePropButton.setOnAction(e -> savePropSelected(oddsList, calculatedStrings[0], primaryStage));
+
+        Button propShownScreenBackButton = new Button("Back");
+        propShownScreenBackButton.setOnAction(e -> backButton(primaryStage));
+
+        VBox vbox = new VBox(10);
+        vbox.getChildren().addAll(higherOddsLabel, lowerOddsLabel, savePropButton);
+        vbox.setAlignment(Pos.CENTER);
+        addPropRoot.setCenter(vbox);
+
+        addPropRoot.setBottom(propShownScreenBackButton);
+        BorderPane.setAlignment(propShownScreenBackButton, Pos.BOTTOM_LEFT);
+
+        Scene addPropScene = new Scene(addPropRoot, 400, 300);
+        primaryStage.setScene(addPropScene);
+
+    }
+
+    /**
      * Sets the display and calls necessary backend methods to save prop
      */
-    public void savePropSelected() {
+    public void savePropSelected(ArrayList<String> oddsList, String highestOdds, Stage primaryStage) {
+        // OddsBackend.saveHighestPropOdds(oddsList, highestOdds);
+        clearCurrentGUI(primaryStage);
+        BorderPane addPropRoot = new BorderPane();
 
+        Label savedConfirmationLabel = new Label("Prop Saved");
+
+        Button savePropSelectedScreenBackButton = new Button("Back");
+        savePropSelectedScreenBackButton.setOnAction(e -> backButton(primaryStage));
+
+        VBox vbox = new VBox(10);
+        vbox.getChildren().addAll(savedConfirmationLabel);
+        vbox.setAlignment(Pos.CENTER);
+        addPropRoot.setCenter(vbox);
+
+        addPropRoot.setBottom(savePropSelectedScreenBackButton);
+        BorderPane.setAlignment(savePropSelectedScreenBackButton, Pos.BOTTOM_LEFT);
+
+        Scene addPropScene = new Scene(addPropRoot, 400, 300);
+        primaryStage.setScene(addPropScene);
     }
 
     /**
      * Sets the display and calls necessary backend methods to see saved props
      */
-    public void showSavedPropsSelected() {
+    public void showSavedPropsSelected(ArrayList<String> oddsList, Stage primaryStage) {
+        int length = oddsList.size();
+        if (length == 0) {
+            clearCurrentGUI(primaryStage);
+            BorderPane addPropRoot = new BorderPane();
 
+            Label noSavedPropsLabel = new Label("No Saved Props");
+
+            Button noSavedPropBackButton = new Button("Back");
+            noSavedPropBackButton.setOnAction(e -> backButton(primaryStage));
+
+            VBox vbox = new VBox(10);
+            vbox.getChildren().addAll(noSavedPropsLabel, noSavedPropBackButton);
+            vbox.setAlignment(Pos.CENTER);
+            addPropRoot.setCenter(vbox);
+
+            Scene addPropScene = new Scene(addPropRoot, 400, 300);
+            primaryStage.setScene(addPropScene);
+        } else if (length > 0) {
+            clearCurrentGUI(primaryStage);
+            BorderPane addPropRoot = new BorderPane();
+
+            Button savedPropScreenBackButton = new Button("Back");
+            savedPropScreenBackButton.setOnAction(e -> backButton(primaryStage));
+
+            Button clearSavedPropsButton = new Button("Clear Saved Props");
+            clearSavedPropsButton.setOnAction(e -> clearSavedPropsSelected(oddsList, primaryStage));
+
+            VBox vbox = new VBox(10);
+            for (int i = 0; i < length; i++) {
+                String prop = oddsList.get(i);
+                Label savedPropLabel = new Label(prop);
+                vbox.getChildren().add(savedPropLabel);
+            }
+            vbox.setAlignment(Pos.CENTER);
+            addPropRoot.setCenter(vbox);
+
+            addPropRoot.setBottom(savedPropScreenBackButton);
+            BorderPane.setAlignment(savedPropScreenBackButton, Pos.BOTTOM_LEFT);
+
+            addPropRoot.setBottom(clearSavedPropsButton);
+            BorderPane.setAlignment(clearSavedPropsButton, Pos.BOTTOM_RIGHT);
+
+            addPropRoot.setBottom(savedPropScreenBackButton);
+            BorderPane.setAlignment(savedPropScreenBackButton, Pos.BOTTOM_LEFT);
+
+            Scene addPropScene = new Scene(addPropRoot, 400, 300);
+            primaryStage.setScene(addPropScene);
+
+        }
     }
 
     /**
      * Sets the display and calls necessary backend methods to clear saved props
      */
-    public void clearSavedPropsSelected() {
+    public void clearSavedPropsSelected(ArrayList<String> oddsList, Stage primaryStage) {
+        // OddsBackend.clearList(oddsList);
+        clearCurrentGUI(primaryStage);
+        BorderPane addPropRoot = new BorderPane();
 
-    }
+        Button confirmButton = new Button("PRESS TO CONFIRM");
+        confirmButton.setOnAction(e -> System.out.print("Cleared"));// OddsBackend.clearList(oddsList););
 
-    /**
-     * Takes user back to main menu
-     */
-    public void backButton() {
+        Button clearConfirmScreenBackButton = new Button("Back");
+        clearConfirmScreenBackButton.setOnAction(e -> backButton(primaryStage));
+
+        VBox vbox = new VBox(10);
+        vbox.getChildren().addAll(confirmButton);
+        vbox.setAlignment(Pos.CENTER);
+        addPropRoot.setCenter(vbox);
 
     }
 
@@ -134,7 +295,28 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         primaryStage.close();
     }
 
+    /**
+     * 
+     * @param primaryStage
+     */
+    private void clearCurrentGUI(Stage primaryStage) {
+        BorderPane emptyPane = new BorderPane();
+        Scene emptyScene = new Scene(emptyPane, 400, 300);
+        primaryStage.setScene(emptyScene);
+    }
 
+    /**
+     * 
+     */
+    public void backButton(Stage primaryStage) {
+        clearCurrentGUI(primaryStage);
+        start(primaryStage);
+    }
+
+    /**
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

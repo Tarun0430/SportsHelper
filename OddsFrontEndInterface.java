@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,27 +25,27 @@ public interface OddsFrontEndInterface {
     /**
      * Sets the display for if Add prop is selected
      */
-    public void AddPropSelected();
+    public void addPropSelected(Stage primaryStage);
 
     /**
      * Sets the display and calls necessary backend methods to save prop
      */
-    public void savePropSelected();
+    public void savePropSelected(ArrayList<String> oddsList, String highestOdds, Stage primaryStage);
 
     /**
      * Sets the display and calls necessary backend methods to see saved props
      */
-    public void showSavedPropsSelected();
+    public void showSavedPropsSelected(ArrayList<String> oddsList, Stage primaryStage);
 
     /**
      * Sets the display and calls necessary backend methods to clear saved props
      */
-    public void clearSavedPropsSelected();
+    public void clearSavedPropsSelected(ArrayList<String> oddsList, Stage primaryStage);
 
     /**
      * Takes user back to main menu
      */
-    public void backButton();
+    public void backButton(Stage primaryStage);
 
     /**
      * Closes app (close stage)
