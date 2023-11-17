@@ -186,11 +186,30 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         // Get the values from the text fields
         String playerName = playerNameField.getText();
         String propType = propTypeField.getText();
+        String overOddsString = overOddsField.getText();
+        String underOddsString = underOddsField.getText();
+        double overOdds = 0;
+        double underOdds = 0;
+
+        //If input is even, numeric value should be 100
+        if (overOddsString.equalsIgnoreCase("Even")) {
+            overOdds = 100;
+        }
+        else {
+            overOdds = Double.parseDouble(overOddsField.getText());
+
+        }
+
+        if (underOddsString.equalsIgnoreCase("Even")) {
+            underOdds = 100;
+        }
+        else {
+            underOdds = Double.parseDouble(overOddsField.getText());
+
+        }
 
         // Parse other fields as needed (e.g., for numerical values)
         double line = Double.parseDouble(lineField.getText());
-        double overOdds = Double.parseDouble(overOddsField.getText());
-        double underOdds = Double.parseDouble(underOddsField.getText());
         String[] calculatedStrings = new String[2];
 
         // Gets the final string with prop percentages
