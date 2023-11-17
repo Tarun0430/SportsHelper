@@ -2,10 +2,13 @@ import java.util.ArrayList;
 
 public class OddsBackend implements OddsBackendInterface {
     /**
-     * 
+     * propList array that holds the results as a string
      */
     private ArrayList<String> propList;
 
+    /**
+     * propList array that holds the results as a string
+     */
     public OddsBackend(ArrayList<String> propList) {
       this.propList = new ArrayList<>();
   }
