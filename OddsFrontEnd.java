@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -46,6 +47,7 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
     /**
      * Sets up the stage/display and calls on the following methods when needed.
      * This is the main menu
+     * 
      * @param primaryStage
      */
     public void start(Stage primaryStage) {
@@ -79,7 +81,9 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         primaryStage.setScene(mainMenuScene);
 
         // Set the stage title and show it
-        primaryStage.setTitle("Prop Manager");
+        primaryStage.setTitle("Odds Helper");
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
         primaryStage.show();
 
     }
@@ -162,6 +166,8 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
         Scene addUIScene = new Scene(addPropRoot, 400, 300);
         primaryStage.setScene(addUIScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
 
     }
 
@@ -224,11 +230,14 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         // Sets scene
         Scene propReturnedUIScene = new Scene(addPropRoot, 400, 300);
         primaryStage.setScene(propReturnedUIScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
 
     }
 
     /**
      * Sets the display and calls necessary backend methods to save prop
+     * 
      * @param oddsList
      * @param highestOddsString
      * @paran primaryStage
@@ -257,10 +266,13 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
         Scene propSavedUIScene = new Scene(savePropSelectedRoot, 400, 300);
         primaryStage.setScene(propSavedUIScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
     }
 
     /**
      * Sets the display and calls necessary backend methods to see saved props
+     * 
      * @param oddsList
      * @param primaryStage
      */
@@ -284,8 +296,10 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
             Scene noSavedPropsUIScene = new Scene(noSavedPropsRoot, 400, 300);
             primaryStage.setScene(noSavedPropsUIScene);
+            primaryStage.setFullScreen(true);
+            primaryStage.setFullScreenExitHint("");
 
-          // If there are saved props
+            // If there are saved props
         } else if (length > 0) {
             clearCurrentGUI(primaryStage);
             BorderPane savedPropsRoot = new BorderPane();
@@ -313,12 +327,15 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
             Scene savedPropsUIScene = new Scene(savedPropsRoot, 400, 300);
             primaryStage.setScene(savedPropsUIScene);
+            primaryStage.setFullScreen(true);
+            primaryStage.setFullScreenExitHint("");
 
         }
     }
 
     /**
      * Sets the display and calls necessary backend methods to clear saved props
+     * 
      * @param oddsList
      * @param primaryStage
      */
@@ -342,11 +359,15 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
         Scene confirmClearUIScene = new Scene(clearSavedPropsRoot, 400, 300);
         primaryStage.setScene(confirmClearUIScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
 
     }
 
     /**
-     * Handles the UI if the confirm button is selected when trying to clear saved props
+     * Handles the UI if the confirm button is selected when trying to clear saved
+     * props
+     * 
      * @param primaryStage
      * @param oddsList
      */
@@ -370,10 +391,13 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
         Scene propsClearedUIScene = new Scene(confirmedButtonSelectedRoot, 400, 300);
         primaryStage.setScene(propsClearedUIScene);
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
     }
 
     /**
      * Closes app (close stage)
+     * 
      * @param primaryStage
      */
     public void exitButton(Stage primaryStage) {
@@ -382,6 +406,7 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
     /**
      * Clears the GUI
+     * 
      * @param primaryStage
      */
     private void clearCurrentGUI(Stage primaryStage) {
@@ -392,6 +417,7 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
     /**
      * Sets UI to main screen
+     * 
      * @param primaryStage
      */
     public void backButton(Stage primaryStage) {
@@ -401,6 +427,7 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
 
     /**
      * Deeclares frontend and backend, and starts the main command loop
+     * 
      * @param args
      */
     public static void main(String[] args) {
