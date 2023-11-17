@@ -6,12 +6,9 @@ public class OddsBackend implements OddsBackendInterface {
      */
     private ArrayList<String> propList;
 
-    /**
-     * 
-     */
-    public OddsBackend() {
-       this.propList = new ArrayList<>();
-    }
+    public OddsBackend(ArrayList<String> propList) {
+      this.propList = new ArrayList<>();
+  }
 
      /**
      * Gets a string that returns the percentages of the prop over and unders
@@ -44,10 +41,10 @@ public class OddsBackend implements OddsBackendInterface {
             // Test System.out.println(odds1Percent);
           }
            if (underOdds < 0) {
-            underOddsPercent = NegativeOddsPercent(overOdds);
+            underOddsPercent = NegativeOddsPercent(underOdds);
             // Test System.out.println(odds1Percent);
-          } else if (overOdds > 0) {
-            underOddsPercent = PositiveOddsPercent(overOdds);
+          } else if (underOdds > 0) {
+            underOddsPercent = PositiveOddsPercent(underOdds);
             // Test System.out.println(odds1Percent);
           }
           double trueHighOdds = truePercent(overOddsPercent, underOddsPercent);

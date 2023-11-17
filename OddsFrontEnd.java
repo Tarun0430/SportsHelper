@@ -21,11 +21,16 @@ import java.util.Arrays;
  */
 public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
     private OddsBackend backend;
-    ArrayList<String> oddsList = new ArrayList<>();
+    static ArrayList<String> oddsList = new ArrayList<>();
 
-    public void setBackend(OddsBackend backend) {
+    public OddsFrontEnd(OddsBackend backend) {
         this.backend = backend;
     }
+
+    public OddsFrontEnd() {
+        this.backend = new OddsBackend(new ArrayList<>());
+    }
+
     /**
      * Sets up the stage/display and calls on the following methods when needed
      * 
@@ -131,11 +136,14 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
         // Create a VBox to hold labels, text fields, and buttons
         VBox vbox = new VBox(10); // 10 is the spacing between nodes
         vbox.getChildren().addAll(playerNameLabel, playerNameField, propTypeLabel, propTypeField, lineLabel, lineField,
-                overOddsLabel, overOddsField, underOddsLabel, underOddsField, enterButton, backButton);
+                overOddsLabel, overOddsField, underOddsLabel, underOddsField, enterButton);
         vbox.setAlignment(Pos.CENTER_LEFT);
 
         // Set VBox to the center of the BorderPane
         addPropRoot.setCenter(vbox);
+        addPropRoot.setBottom(backButton);
+        BorderPane.setAlignment(backButton, Pos.BOTTOM_LEFT);
+
         Scene addPropScene = new Scene(addPropRoot, 400, 300);
         primaryStage.setScene(addPropScene);
 
@@ -250,10 +258,10 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
             vbox.setAlignment(Pos.CENTER);
             addPropRoot.setCenter(vbox);
 
-            addPropRoot.setBottom(savedPropScreenBackButton);
+            addPropRoot.setLeft(savedPropScreenBackButton);
             BorderPane.setAlignment(savedPropScreenBackButton, Pos.BOTTOM_LEFT);
 
-            addPropRoot.setBottom(clearSavedPropsButton);
+            addPropRoot.setRight(clearSavedPropsButton);
             BorderPane.setAlignment(clearSavedPropsButton, Pos.BOTTOM_RIGHT);
 
             Scene addPropScene = new Scene(addPropRoot, 400, 300);
@@ -266,12 +274,11 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
      * Sets the display and calls necessary backend methods to clear saved props
      */
     public void clearSavedPropsSelected(ArrayList<String> oddsList, Stage primaryStage) {
-        backend.clearList(oddsList);
         clearCurrentGUI(primaryStage);
         BorderPane addPropRoot = new BorderPane();
 
         Button confirmButton = new Button("PRESS TO CONFIRM");
-        confirmButton.setOnAction(e -> backend.clearList(oddsList));
+        confirmButton.setOnAction(e -> confirmButtonSelected(primaryStage, oddsList));
 
         Button clearConfirmScreenBackButton = new Button("Back");
         clearConfirmScreenBackButton.setOnAction(e -> backButton(primaryStage));
@@ -338,9 +345,9 @@ public class OddsFrontEnd extends Application implements OddsFrontEndInterface {
      * @param args
      */
     public static void main(String[] args) {
-        OddsFrontEnd frontend = new OddsFrontEnd();
-        frontend.setBackend(new OddsBackend());
-    
+        OddsBackend back = new OddsBackend(oddsList);
+
+        OddsFrontEnd frontend = new OddsFrontEnd(back); // Use the constructor
         launch(args);
     }
 
