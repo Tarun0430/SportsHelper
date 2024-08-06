@@ -13,11 +13,9 @@ This is an app that will help with fantasy sports picks utilizing the following 
 
 6. Will give the odds for the over and under in % form
 
-7. Will ask if you would like to save this prop
-    a. If yes it will save the prop with the highest %
+7. Will ask if you would like to save this prop -> If yes it will save the prop with the highest %
 
-8. Ask if you would like to see saved props
-    a. If yes, it will show saved props in order of highest %
+8. Ask if you would like to see saved props -> If yes, it will show saved props in order of highest %
 
 9. Ask if you would like to add another prop
 
