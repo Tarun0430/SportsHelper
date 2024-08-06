@@ -24,11 +24,7 @@ UI Vision:
 Main screen with the following options:
 
 1. Add a prop
-a. Steps 1-5 above to add a prop
-b. Step 6 to see if prop should be saved
 
 2. See saved props
-a. Step 7 from above
-b. At the bottom there should be an option to clear saved props
 
 3. Close app
