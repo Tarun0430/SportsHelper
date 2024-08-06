@@ -9,15 +9,17 @@ This is an app that will help with fantasy sports picks utilizing the following 
 
 4. Ask for over and under odds
 
-5. Will give the odds for the over and under in % form
+5. Ask for (optional) intagibles rating out of 10
 
-6. Will ask if you would like to save this prop
+6. Will give the odds for the over and under in % form
+
+7. Will ask if you would like to save this prop
     a. If yes it will save the prop with the highest %
 
-7. Ask if you would like to see saved props
+8. Ask if you would like to see saved props
     a. If yes, it will show saved props in order of highest %
 
-8. Ask if you would like to ad:qd another prop
+9. Ask if you would like to add another prop
 
 
 UI Vision:
